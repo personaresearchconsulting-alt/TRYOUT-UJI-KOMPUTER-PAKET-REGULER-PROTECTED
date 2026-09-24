@@ -3,456 +3,690 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>TRYOUT SIMULASI CAT UJI KOMPUTER</title>
 
-<link rel="dns-prefetch" href="//fonts.googleapis.com">
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
+    * {
+        box-sizing: border-box;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f1f5f9;
+        color: #1e293b;
+    }
 
-body{
-background:#f1f5f9;
-min-height:100vh;
-overflow-x:hidden;
-color:#0f172a;
-}
+    /* LOGIN */
+    #loginPage {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
 
-.hidden{
-display:none !important;
-}
+    .login-card {
+        width: 100%;
+        max-width: 420px;
+        background: #ffffff;
+        padding: 35px 30px;
+        border-radius: 18px;
+        box-shadow: 0 10px 35px rgba(15, 23, 42, 0.12);
+        text-align: center;
+    }
 
-#loadingScreen{
-position:fixed;
-inset:0;
-background:#ffffff;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
+    .login-card h1 {
+        margin: 0 0 8px;
+        font-size: 25px;
+        color: #0f172a;
+    }
 
-.loader{
-width:60px;
-height:60px;
-border-radius:50%;
-border:5px solid rgba(15,23,42,.1);
-border-top:5px solid #0f172a;
-animation:spin .8s linear infinite;
-margin-bottom:18px;
-}
+    .login-card h2 {
+        margin: 0 0 28px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #64748b;
+    }
 
-@keyframes spin{
-100%{ transform:rotate(360deg); }
-}
+    .login-card input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 16px;
+        outline: none;
+        margin-bottom: 14px;
+        text-align: center;
+    }
 
-.center-page{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-}
+    .login-card input:focus {
+        border-color: #2196f3;
+    }
 
-.glass{
-background:#ffffff;
-border:1px solid #cbd5e1;
-box-shadow:0 10px 25px -5px rgba(0,0,0,.1);
-}
+    .login-btn {
+        width: 100%;
+        border: none;
+        padding: 14px;
+        border-radius: 10px;
+        background: #2196f3;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-.login-card{
-width:100%;
-max-width:450px;
-padding:40px;
-border-radius:25px;
-text-align:center;
-animation:fade .5s ease;
-}
+    .login-btn:hover {
+        background: #1976d2;
+    }
 
-@keyframes fade{
-from{ opacity:0; transform:translateY(20px); }
-to{ opacity:1; transform:translateY(0); }
-}
+    #loginMessage {
+        margin-top: 15px;
+        min-height: 20px;
+        font-size: 14px;
+        color: #dc2626;
+    }
 
-.login-card h1{
-font-size:28px;
-margin-bottom:12px;
-color:#0f172a;
-}
+    /* DASHBOARD */
+    #dashboard {
+        display: none;
+        min-height: 100vh;
+        padding: 25px 18px 40px;
+    }
 
-.subtitle{
-opacity:.8;
-margin-bottom:30px;
-color:#475569;
-}
+    .header {
+        max-width: 1100px;
+        margin: 0 auto 25px;
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        color: white;
+        border-radius: 18px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+    }
 
-input{
-width:100%;
-padding:15px;
-border:1px solid #cbd5e1;
-outline:none;
-border-radius:14px;
-margin-bottom:20px;
-font-size:15px;
-background:#f8fafc;
-color:#0f172a;
-}
+    .header h1 {
+        margin: 0 0 8px;
+        font-size: 26px;
+    }
 
-input:focus{
-border-color:#2196f3;
-background:#ffffff;
-}
+    .header p {
+        margin: 4px 0;
+        opacity: 0.9;
+    }
 
-button{
-border:none;
-cursor:pointer;
-transition:.3s;
-}
+    #accessInfo {
+        margin-top: 12px;
+        font-size: 13px;
+    }
 
-.login-btn{
-width:100%;
-padding:15px;
-background:#2196f3;
-color:white;
-border-radius:14px;
-font-size:16px;
-font-weight:600;
-}
+    .menu-grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 18px;
+    }
 
-.login-btn:hover{
-transform:translateY(-3px);
-background:#1e88e5;
-}
+    .menu-card {
+        display: block;
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(135deg, #0f172a, #1e40af);
+        border-radius: 16px;
+        padding: 23px 20px;
+        min-height: 120px;
+        box-shadow: 0 7px 20px rgba(15, 23, 42, 0.12);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-#dashboard{
-padding:30px;
-}
+    .menu-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.18);
+    }
 
-.topbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-flex-wrap:wrap;
-margin-bottom:30px;
-border-bottom:2px solid #e2e8f0;
-padding-bottom:20px;
-}
+    .menu-number {
+        font-size: 13px;
+        opacity: 0.75;
+        margin-bottom: 8px;
+    }
 
-.top-right{
-display:flex;
-align-items:center;
-gap:15px;
-flex-wrap:wrap;
-}
+    .menu-title {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.35;
+    }
 
-.count-box{
-padding:15px 20px;
-border-radius:15px;
-background:#cbd5e1;
-color:#0f172a;
-font-weight:600;
-}
+    .logout-wrap {
+        max-width: 1100px;
+        margin: 28px auto 0;
+        text-align: center;
+    }
 
-.logout-btn{
-padding:14px 20px;
-background:#f44336;
-color:white;
-border-radius:12px;
-font-weight:500;
-}
+    .logout-btn {
+        border: none;
+        background: #dc2626;
+        color: white;
+        padding: 11px 25px;
+        border-radius: 9px;
+        cursor: pointer;
+        font-weight: bold;
+    }
 
-.menu-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
-}
+    .logout-btn:hover {
+        background: #b91c1c;
+    }
 
-.menu-card{
-padding:35px 20px;
-border-radius:22px;
-text-align:center;
-font-weight:600;
-font-size:17px;
-cursor:pointer;
-transition:.25s;
-background:linear-gradient(135deg,#0b2447,#19376d);
-border:1px solid rgba(255,255,255,.1);
-color:#ffffff;
-box-shadow:0 10px 20px rgba(11,36,71,.15);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:5px;
-}
+    .loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
 
-.menu-card small{
-font-size:11px;
-color:rgba(255,255,255,.7);
-letter-spacing:.5px;
-text-transform:uppercase;
-font-weight:400;
-}
+    @media (max-width: 600px) {
+        .login-card {
+            padding: 30px 22px;
+        }
 
-.menu-card:hover{
-transform:translateY(-5px);
-background:linear-gradient(135deg,#19376d,#254b8c);
-}
+        .header h1 {
+            font-size: 22px;
+        }
 
-.popup{
-position:fixed;
-top:30px;
-right:30px;
-background:#0f172a;
-color:white;
-padding:18px 24px;
-border-left:5px solid #2196f3;
-border-radius:14px;
-z-index:9999;
-}
-
-footer{
-text-align:center;
-padding:40px 30px;
-color:#64748b;
-font-size:14px;
-border-top:1px solid #e2e8f0;
-margin-top:40px;
-}
-
-@media(max-width:768px){
-.login-card{ padding:30px 22px; }
-.login-card h1{ font-size:23px; }
-#dashboard{ padding:20px; }
-}
-
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<div id="loadingScreen" style="display: none;">
-<div class="loader"></div>
-<h3 style="color:#0f172a;font-weight:600;">Menghubungkan ke Sistem...</h3>
+<!-- ================= LOGIN ================= -->
+<div id="loginPage">
+
+    <div class="login-card">
+
+        <h1>TRYOUT SIMULASI CAT UJI KOMPUTER</h1>
+
+        <h2>PERSONA RESEARCH &amp; CONSULTING</h2>
+
+        <input
+            type="text"
+            id="passwordInput"
+            placeholder="Masukkan Password"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+        >
+
+        <button class="login-btn" id="loginButton" onclick="login()">
+            MASUK
+        </button>
+
+        <div id="loginMessage"></div>
+
+    </div>
+
 </div>
 
-<section id="loginPage" class="center-page">
-<div class="glass login-card">
-<h1>TRYOUT SIMULASI CAT UJI KOMPUTER</h1>
-<p class="subtitle">PERSONA RESEARCH & CONSULTING</p>
-<input type="password" id="passwordInput" placeholder="Masukkan Password">
-<button class="login-btn" id="loginBtn">LOGIN</button>
-</div>
-</section>
 
-<section id="dashboard" class="hidden">
-<div class="topbar">
-<div>
-<h2>TRYOUT MENU – PAKET REGULER</h2>
-<p id="welcomeText" style="color:#475569;margin-top:4px;"></p>
-</div>
-<div class="top-right">
-<div class="count-box" id="countdown">Loading...</div>
-<button class="logout-btn" id="logoutBtn">Logout</button>
-</div>
+<!-- ================= DASHBOARD ================= -->
+<div id="dashboard">
+
+    <div class="header">
+
+        <h1>TRYOUT SIMULASI CAT UJI KOMPUTER</h1>
+
+        <p>PERSONA RESEARCH &amp; CONSULTING</p>
+
+        <div id="accessInfo"></div>
+
+    </div>
+
+
+    <div class="menu-grid">
+
+        <a class="menu-card" href="Materi_Lengkap_Biner.pdf">
+            <div class="menu-number">01</div>
+            <div class="menu-title">BUKU SAKU BINER</div>
+        </a>
+
+        <a class="menu-card" href="words_studikasus_1.html">
+            <div class="menu-number">02</div>
+            <div class="menu-title">MS WORDS</div>
+        </a>
+
+        <a class="menu-card" href="excel_studikasus_1.html">
+            <div class="menu-number">03</div>
+            <div class="menu-title">MS EXCEL SERI 1</div>
+        </a>
+
+        <a class="menu-card" href="excel_studikasus_2.html">
+            <div class="menu-number">04</div>
+            <div class="menu-title">MS EXCEL SERI 2</div>
+        </a>
+
+        <a class="menu-card" href="ppt_studikasus_1.html">
+            <div class="menu-number">05</div>
+            <div class="menu-title">POWER POINT SERI 1</div>
+        </a>
+
+        <a class="menu-card" href="ppt_studikasus_2.html">
+            <div class="menu-number">06</div>
+            <div class="menu-title">POWER POINT SERI 2</div>
+        </a>
+
+        <a class="menu-card" href="intenet_studikasus_1.html">
+            <div class="menu-number">07</div>
+            <div class="menu-title">INTERNET &amp; NETWORK</div>
+        </a>
+
+        <a class="menu-card" href="uji_komputer_1.html">
+            <div class="menu-number">08</div>
+            <div class="menu-title">UJI KOMPUTER MIX</div>
+        </a>
+
+        <a class="menu-card" href="biner_1.html">
+            <div class="menu-number">09</div>
+            <div class="menu-title">SISTEM BINER</div>
+        </a>
+
+    </div>
+
+
+    <div class="logout-wrap">
+        <button class="logout-btn" onclick="logout()">
+            KELUAR
+        </button>
+    </div>
+
 </div>
 
-<div class="menu-grid">
-<div class="menu-card pdf-card" data-link="Materi_Lengkap_Biner.pdf">
-<span>📖 BUKU SAKU BINER</span>
-<small>Materi & Teori Dasar</small>
-</div>
-<div class="menu-card" data-link="words_studikasus_1.html">
-<span>MS WORDS</span>
-<small>Advanced & Tata Naskah</small>
-</div>
-<div class="menu-card" data-link="excel_studikasus_1.html">
-<span>MS EXCEL SERI 1</span>
-<small>Antarmuka & Statistik Dasar</small>
-</div>
-<div class="menu-card" data-link="excel_studikasus_2.html">
-<span>MS EXCEL SERI 2</span>
-<small>String, Logika & Optimasi</small>
-</div>
-<div class="menu-card" data-link="ppt_studikasus_1.html">
-<span>POWER POINT SERI 1</span>
-<small>Administrasi Paparan & Master</small>
-</div>
-<div class="menu-card" data-link="ppt_studikasus_2.html">
-<span>POWER POINT SERI 2</span>
-<small>Visual Data & Multimedia</small>
-</div>
-<div class="menu-card" data-link="intenet_studikasus_1.html">
-<span>INTERNET & NETWORK</span>
-<small>Infrastruktur & Ops Digital</small>
-</div>
-<div class="menu-card" data-link="uji_komputer_1.html">
-<span>UJI KOMPUTER MIX</span>
-<small>Infrastruktur & Ops Digital</small>
-</div>
-<div class="menu-card" data-link="biner_1.html">
-<span>SISTEM BINER</span>
-<small>Paket Khusus Biner</small>
-</div>
-</div>
-</section>
-
-<div id="popup" class="popup hidden"></div>
-
-<footer>
-© PERSONA RESEARCH & CONSULTING
-</footer>
 
 <script>
-// URL Google Apps Script yang sudah Anda miliki terpasang langsung di sini
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-mcX43rTZu8eJKJ-jkGygGrRsgsL92_ziKQSjnoaolIvXYKOVTPMENoHPVjIVkD1kcg/exec";
 
-const passwordList = [
-"PRC92KF","PRC51QM","PRC38XL","PRC74ZN","PRC16RT",
-"PRC83XB","PRC29VL","PRC64PT","PRC71KY","PRC55NF",
-"PRC42QD","PRC38MR","PRC74XH","PRC61PJ","PRC27LW",
-"PRC84TC","PRC53KN","PRC19XU","PRC67RE","PRC41VV",
-"PRC88MG","PRC25QS","PRC73NK","PRC90LV","PRC36XI",
-"PRC52PO","PRC77KA","PRC99QB","PRC44LC","PRC88ND",
-"PRC22XE","PRC66RF","PRC11PG","PRC55VH","PRC77MJ",
-"PRC33TK","PRC99XL","PRC44KM","PRC88QN","PRC22LP",
-"PRC66NQ","PRC11XR","PRC55RS","PRC77PT","PRC33UV",
-"PRC99VM","PRC44WT","PRC88XK","PRC22YQ","PRC66ZL"
-];
+/* =========================================================
+   PERSONA CLASS — UJI KOMPUTER
+   ========================================================= */
 
-const loginBtn = document.getElementById("loginBtn");
-const passwordInput = document.getElementById("passwordInput");
-const loginPage = document.getElementById("loginPage");
-const dashboard = document.getElementById("dashboard");
-const popup = document.getElementById("popup");
-const welcomeText = document.getElementById("welcomeText");
-const countdown = document.getElementById("countdown");
-const loadingScreen = document.getElementById("loadingScreen");
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzbDujF3XDmzbFD3Od4HFWSh2fw_Tui7mnPDVbrtlvK9Df11elfiRFdTpNtb9Up27Y3/exec";
 
-function getDeviceId(){
-const rawData = [
-navigator.userAgent, navigator.platform, navigator.language,
-screen.width, screen.height, window.devicePixelRatio,
-Intl.DateTimeFormat().resolvedOptions().timeZone,
-navigator.hardwareConcurrency || "cpu"
-].join("###");
-return generateHash(rawData);
+const SESSION_KEY = "personaUjiKomputerSession";
+
+
+/* =========================================================
+   DEVICE ID
+   ========================================================= */
+
+function getDeviceId() {
+
+    let deviceId = localStorage.getItem("personaDeviceId");
+
+    if (!deviceId) {
+
+        deviceId =
+            "DEV-" +
+            Date.now().toString(36) +
+            "-" +
+            Math.random().toString(36).substring(2, 10);
+
+        localStorage.setItem("personaDeviceId", deviceId);
+    }
+
+    return deviceId;
 }
 
-function generateHash(str){
-let hash = 0;
-for(let i=0;i<str.length;i++){
-hash=((hash<<5)-hash)+str.charCodeAt(i);
-hash|=0;
-}
-return "PRC-"+Math.abs(hash);
-}
 
-function showPopup(text){
-popup.innerText=text;
-popup.classList.remove("hidden");
-setTimeout(()=>{ popup.classList.add("hidden"); },2500);
+/* =========================================================
+   PRC00 — TESTING PASSWORD
+   HARUS DICEK SEBELUM FETCH
+   ========================================================= */
+
+function checkPRC00(password) {
+
+    return password.trim().toUpperCase() === "PRC00";
+
 }
 
-loginBtn.addEventListener("click",loginSystem);
 
-async function loginSystem(){
-const input = passwordInput.value.trim();
-if(!passwordList.includes(input)){
-showPopup("Password salah.");
-return;
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+async function login() {
+
+    const input = document.getElementById("passwordInput");
+    const button = document.getElementById("loginButton");
+    const message = document.getElementById("loginMessage");
+
+    const password = input.value.trim().toUpperCase();
+
+    message.textContent = "";
+
+    if (!password) {
+        message.textContent = "Masukkan password terlebih dahulu.";
+        return;
+    }
+
+
+    /* -----------------------------------------------------
+       PRC00 TESTING
+       ----------------------------------------------------- */
+
+    if (checkPRC00(password)) {
+
+        const session = {
+            password: "PRC00",
+            jenis: "FULL",
+            paket: "TEST",
+            firstLogin: null,
+            expiry: null,
+            testing: true
+        };
+
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify(session)
+        );
+
+        showDashboard(session);
+
+        return;
+    }
+
+
+    /* -----------------------------------------------------
+       NORMAL PASSWORD
+       ----------------------------------------------------- */
+
+    button.classList.add("loading");
+    button.textContent = "MEMERIKSA...";
+
+
+    try {
+
+        const deviceId = getDeviceId();
+
+        const response = await fetch(
+            SCRIPT_URL +
+            "?password=" +
+            encodeURIComponent(password) +
+            "&deviceId=" +
+            encodeURIComponent(deviceId),
+            {
+                method: "GET",
+                cache: "no-store"
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (data.status !== "success") {
+
+            message.textContent =
+                data.message ||
+                "Password tidak valid.";
+
+            return;
+        }
+
+
+        /* -------------------------------------------------
+           UJI KOMPUTER:
+           KOM = akses UJI KOMPUTER
+           FULL = akses semua program
+           ------------------------------------------------- */
+
+        const jenis = String(data.jenis || "").toUpperCase();
+
+        if (jenis !== "KOM" && jenis !== "FULL") {
+
+            message.textContent =
+                "Password ini tidak memiliki akses UJI KOMPUTER.";
+
+            return;
+        }
+
+
+        /* -------------------------------------------------
+           SIMPAN SESSION
+           ------------------------------------------------- */
+
+        const session = {
+            password: data.password || password,
+            jenis: jenis,
+            paket: data.paket || "",
+            firstLogin: data.firstLogin || null,
+            expiry: data.expiry || null,
+            testing: false
+        };
+
+
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify(session)
+        );
+
+
+        showDashboard(session);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Gagal terhubung ke sistem. Silakan coba lagi.";
+
+    } finally {
+
+        button.classList.remove("loading");
+        button.textContent = "MASUK";
+
+    }
+
 }
 
-loadingScreen.style.display = "flex";
-const deviceId = getDeviceId();
 
-try {
-const response = await fetch(`${SCRIPT_URL}?password=${input}&deviceId=${deviceId}`);
-const result = await response.json();
+/* =========================================================
+   SHOW DASHBOARD
+   ========================================================= */
 
-if(result.status === "success"){
-localStorage.setItem("loggedInUser", input);
-localStorage.setItem("userFirstLogin", result.firstLogin);
-showPopup("Login berhasil.");
-openDashboard(input, result.firstLogin);
-} else {
-showPopup(result.message);
-loadingScreen.style.display = "none";
+function showDashboard(session) {
+
+    document.getElementById("loginPage").style.display = "none";
+
+    document.getElementById("dashboard").style.display = "block";
+
+
+    const accessInfo =
+        document.getElementById("accessInfo");
+
+
+    if (session.testing) {
+
+        accessInfo.innerHTML =
+            "TESTING MODE • PRC00 • Akses tanpa batas";
+
+        return;
+    }
+
+
+    let expiryText = "-";
+
+    if (session.expiry) {
+
+        const expiryDate =
+            new Date(session.expiry);
+
+        expiryText =
+            expiryDate.toLocaleDateString(
+                "id-ID",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+    }
+
+
+    accessInfo.innerHTML =
+        "Akses: <strong>" +
+        session.jenis +
+        "</strong>" +
+        " &nbsp;•&nbsp; " +
+        "Paket: <strong>" +
+        session.paket +
+        "</strong>" +
+        " &nbsp;•&nbsp; " +
+        "Berlaku sampai: <strong>" +
+        expiryText +
+        "</strong>";
+
 }
-} catch (error) {
-showPopup("Gagal sinkronisasi data online. Pastikan Web App Script aktif.");
-loadingScreen.style.display = "none";
+
+
+/* =========================================================
+   RESTORE SESSION
+   ========================================================= */
+
+function restoreSession() {
+
+    const saved =
+        localStorage.getItem(SESSION_KEY);
+
+    if (!saved) {
+        return;
+    }
+
+
+    try {
+
+        const session =
+            JSON.parse(saved);
+
+
+        /* PRC00 */
+
+        if (session.testing === true) {
+
+            showDashboard(session);
+            return;
+        }
+
+
+        /* -------------------------------------------------
+           CEK EXPIRY LOCAL
+           ------------------------------------------------- */
+
+        if (session.expiry) {
+
+            const expiry =
+                new Date(session.expiry);
+
+            if (
+                !isNaN(expiry.getTime()) &&
+                new Date() > expiry
+            ) {
+
+                localStorage.removeItem(SESSION_KEY);
+
+                document.getElementById(
+                    "loginMessage"
+                ).textContent =
+                    "Masa akses telah berakhir.";
+
+                return;
+            }
+        }
+
+
+        /* -------------------------------------------------
+           HANYA KOM / FULL
+           ------------------------------------------------- */
+
+        const jenis =
+            String(session.jenis || "").toUpperCase();
+
+        if (
+            jenis !== "KOM" &&
+            jenis !== "FULL"
+        ) {
+
+            localStorage.removeItem(SESSION_KEY);
+            return;
+        }
+
+
+        showDashboard(session);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        localStorage.removeItem(SESSION_KEY);
+
+    }
+
 }
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function logout() {
+
+    localStorage.removeItem(SESSION_KEY);
+
+    document.getElementById(
+        "dashboard"
+    ).style.display = "none";
+
+    document.getElementById(
+        "loginPage"
+    ).style.display = "flex";
+
+    document.getElementById(
+        "passwordInput"
+    ).value = "";
+
+    document.getElementById(
+        "loginMessage"
+    ).textContent = "";
+
 }
 
-function openDashboard(user, firstLoginTime){
-loginPage.classList.add("hidden");
-dashboard.classList.remove("hidden");
-loadingScreen.style.display = "none";
-welcomeText.innerHTML=`Login sebagai: <b>${user}</b>`;
-startCountdown(Number(firstLoginTime));
-}
 
-let countdownInterval=null;
-function startCountdown(firstLoginTime){
-clearInterval(countdownInterval);
-countdownInterval=setInterval(()=>{
-const end = firstLoginTime + (30*24*60*60*1000);
-const diff = end - Date.now();
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
 
-if(diff <= 0){
-countdown.innerText="Expired";
-clearInterval(countdownInterval);
-localStorage.clear();
-setTimeout(()=>{ location.reload(); }, 2000);
-return;
-}
+document
+    .getElementById("passwordInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor((diff/(1000*60*60))%24);
-const minutes=Math.floor((diff/(1000*60))%60);
-countdown.innerText=`${days}H ${hours}J ${minutes}M`;
-},1000);
-}
+            if (event.key === "Enter") {
+                login();
+            }
 
-const loggedUser = localStorage.getItem("loggedInUser");
-const localFirstLogin = localStorage.getItem("userFirstLogin");
-if(loggedUser && localFirstLogin && passwordList.includes(loggedUser)){
-openDashboard(loggedUser, localFirstLogin);
-}
+        }
+    );
 
-document.getElementById("logoutBtn").addEventListener("click",()=>{
-localStorage.clear();
-location.reload();
-});
 
-document.addEventListener("contextmenu",e=>e.preventDefault());
-document.addEventListener("keydown",e=>{
-if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&e.key==="I")||(e.ctrlKey&&e.key==="u")){
-e.preventDefault();
-}
-});
+/* =========================================================
+   RESTORE SESSION ON LOAD
+   ========================================================= */
 
-document.querySelectorAll(".menu-card").forEach(card=>{
-card.addEventListener("click",()=>{
-const target=card.getAttribute("data-link");
-if(target) window.location.href=target;
-});
-});
+restoreSession();
+
 </script>
+
 </body>
 </html>
